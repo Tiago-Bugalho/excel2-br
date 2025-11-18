@@ -1,0 +1,16 @@
+{
+  "name": "excel2",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tids": "latest"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

@@ -18,7 +18,7 @@ img.excel2 {
 
 button {
   display: block;
-  margin-left: 0 auto;
+  place-items: center;
   background-color: orange;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: large;

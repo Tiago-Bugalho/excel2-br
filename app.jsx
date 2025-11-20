@@ -33,29 +33,10 @@ export default function App() {
       <h1>Excel 2</h1>
       <h2 className="first">Administre suas finanças de forma eficaz agora mesmo!</h2>
 
-      <div className="top">
-        <table>
-          <thead>
-            <tr>
-              <th>Receitas</th>
-              <th>Despesas</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>R$ {receitas.toFixed(2)}</td>
-              <td>R$ {despesas.toFixed(2)}</td>
-              <td>R$ {total.toFixed(2)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
       <section className="dinheiro">
         <input 
           type="text" 
-          placeholder="Descrição" 
+          placeholder="Descrição"
           value={descricao}
           onChange={e => setDescricao(e.target.value)}
         />
@@ -75,6 +56,23 @@ export default function App() {
 
         <button onClick={add}>Adicionar</button>
       </section>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Receitas</th>
+            <th>Despesas</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>R$ {receitas.toFixed(2)}</td>
+            <td>R$ {despesas.toFixed(2)}</td>
+            <td>R$ {total.toFixed(2)}</td>
+          </tr>
+        </tbody>
+      </table>
 
       <table>
         <thead>

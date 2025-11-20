@@ -29,13 +29,14 @@ input.numero {
 
 table {
   margin: 20px auto;
-  width: 60%;
+  width: 35%;
   border-collapse: collapse;
   background: #222;
   color: white;
+  font-size: 15px;
 }
 
 table th, table td {
   border: 1px solid #555;
-  padding: 10px;
+  padding: 8px;
 }

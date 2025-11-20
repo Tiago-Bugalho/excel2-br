@@ -1,43 +1,74 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
-import { tids } from "tids";
 import "./style.css";
 
 export default function App() {
-  const descricao = useRef(null);
-  const valor = useRef(null);
-  const tipo = useRef(null);
-
-  const [itens, setItens] = useState([]);
+  const [descricao, setDescricao] = useState("");
+  const [valor, setValor] = useState("");
+  const [tipo, setTipo] = useState("receita");
+  const [lista, setLista] = useState([]);
 
   function add() {
-    const nome = descricao.current.value;
-    const n = Number(valor.current.value);
-    const t = tipo.current.value;
+    if (!descricao || !valor) return;
 
-    if (!nome.trim() || !n || n <= 0) return;
+    const novo = {
+      descricao,
+      valor: parseFloat(valor),
+      tipo
+    };
 
-    setItens(i => [...i, { nome, valor: n, tipo: t }]);
-
-    descricao.current.value = "";
-    valor.current.value = "";
+    setLista([...lista, novo]);
+    setDescricao("");
+    setValor("");
+    setTipo("receita");
   }
 
-  const receitas = itens.filter(i => i.tipo === "receita").reduce((a, b) => a + b.valor, 0);
-  const despesas = itens.filter(i => i.tipo === "despesa").reduce((a, b) => a + b.valor, 0);
+  const receitas = lista.filter(i => i.tipo === "receita").reduce((a, b) => a + b.valor, 0);
+  const despesas = lista.filter(i => i.tipo === "despesa").reduce((a, b) => a + b.valor, 0);
   const total = receitas - despesas;
 
   return (
     <div>
       <img className="excel2" src="img/excel2.png" alt="" />
-
       <h1>Excel 2</h1>
       <h2 className="first">Administre suas finanças de forma eficaz agora mesmo!</h2>
 
+      <div className="top">
+        <table>
+          <thead>
+            <tr>
+              <th>Receitas</th>
+              <th>Despesas</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>R$ {receitas.toFixed(2)}</td>
+              <td>R$ {despesas.toFixed(2)}</td>
+              <td>R$ {total.toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <section className="dinheiro">
-        <input ref={descricao} type="text" placeholder="Descrição" />
-        <input ref={valor} className="numero" type="number" placeholder="0,00" />
-        <select ref={tipo}>
+        <input 
+          type="text" 
+          placeholder="Descrição" 
+          value={descricao}
+          onChange={e => setDescricao(e.target.value)}
+        />
+
+        <input 
+          className="numero" 
+          type="number" 
+          placeholder="0,00"
+          value={valor}
+          onChange={e => setValor(e.target.value)}
+        />
+
+        <select value={tipo} onChange={e => setTipo(e.target.value)}>
           <option value="receita">Receita📈</option>
           <option value="despesa">Despesa📉</option>
         </select>
@@ -54,30 +85,13 @@ export default function App() {
           </tr>
         </thead>
         <tbody>
-          {itens.map((i, index) => (
+          {lista.map((item, index) => (
             <tr key={index}>
-              <td>{i.nome}</td>
-              <td>R$ {i.valor.toFixed(2)}</td>
-              <td>{i.tipo}</td>
+              <td>{item.descricao}</td>
+              <td>R$ {item.valor.toFixed(2)}</td>
+              <td>{item.tipo}</td>
             </tr>
           ))}
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Receitas Totais</th>
-            <th>Despesas Totais</th>
-            <th>Total Geral</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>R$ {receitas.toFixed(2)}</td>
-            <td>R$ {despesas.toFixed(2)}</td>
-            <td>R$ {total.toFixed(2)}</td>
-          </tr>
         </tbody>
       </table>
     </div>

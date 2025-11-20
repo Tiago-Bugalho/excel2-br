@@ -14,9 +14,6 @@ img.excel2 {
   height: 100px;
 }
 
-.dinheiro {
-}
-
 button {
   display: block;
   margin: 20px auto;
@@ -41,8 +38,4 @@ table {
 table th, table td {
   border: 1px solid #555;
   padding: 10px;
-}
-
-.top {
-  margin-top: 40px;
 }

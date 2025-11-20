@@ -18,6 +18,9 @@ export default function App() {
     if (!nome.trim() || !n || n <= 0) return;
 
     setItens(i => [...i, { nome, valor: n, tipo: t }]);
+
+    descricao.current.value = "";
+    valor.current.value = "";
   }
 
   const receitas = itens.filter(i => i.tipo === "receita").reduce((a, b) => a + b.valor, 0);
@@ -34,15 +37,10 @@ export default function App() {
       <section className="dinheiro">
         <input ref={descricao} type="text" placeholder="Descrição" />
         <input ref={valor} className="numero" type="number" placeholder="0,00" />
-
-        <h1></h1>
-
         <select ref={tipo}>
           <option value="receita">Receita📈</option>
           <option value="despesa">Despesa📉</option>
         </select>
-
-        <h1></h1>
 
         <button onClick={add}>Adicionar</button>
       </section>
@@ -55,7 +53,6 @@ export default function App() {
             <th>Tipo</th>
           </tr>
         </thead>
-
         <tbody>
           {itens.map((i, index) => (
             <tr key={index}>
@@ -64,18 +61,22 @@ export default function App() {
               <td>{i.tipo}</td>
             </tr>
           ))}
+        </tbody>
+      </table>
 
+      <table>
+        <thead>
           <tr>
-            <td><strong>Receitas</strong></td>
-            <td colSpan="2">R$ {receitas.toFixed(2)}</td>
+            <th>Receitas Totais</th>
+            <th>Despesas Totais</th>
+            <th>Total Geral</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
-            <td><strong>Despesas</strong></td>
-            <td colSpan="2">R$ {despesas.toFixed(2)}</td>
-          </tr>
-          <tr>
-            <td><strong>Total</strong></td>
-            <td colSpan="2">R$ {total.toFixed(2)}</td>
+            <td>R$ {receitas.toFixed(2)}</td>
+            <td>R$ {despesas.toFixed(2)}</td>
+            <td>R$ {total.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>

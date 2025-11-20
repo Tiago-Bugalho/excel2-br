@@ -18,7 +18,7 @@ img.excel2 {
 
 button {
   display: block;
-  margin-left: 588px;
+  margin-left: 665px;
   background-color: orange;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: large;
@@ -28,28 +28,22 @@ button {
 
 input.numero {
   background-color: green;
-  border: 5px ridge greenyellow;
 }
 
 table {
   margin: 40px auto;
-  width: 400px;
+  width: 500px;
   border-collapse: collapse;
   text-align: center;
   background: #222;
 }
 
-table th {
+th {
   background: #333;
   padding: 10px;
 }
 
-table td {
+td {
   padding: 8px;
   border-top: 1px solid #444;
-}
-
-.bordaboa {
-  border: 10px solid black;
-  border-radius: 20px;
 }

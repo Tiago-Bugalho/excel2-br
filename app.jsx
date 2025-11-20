@@ -8,18 +8,21 @@ export default function App() {
   const valor = useRef(null);
   const tipo = useRef(null);
 
-  const [receitas, setReceitas] = useState(0);
-  const [despesas, setDespesas] = useState(0);
+  const [itens, setItens] = useState([]);
 
   function add() {
+    const nome = descricao.current.value;
     const n = Number(valor.current.value);
     const t = tipo.current.value;
 
-    if (!n || n <= 0) return;
+    if (!nome.trim() || !n || n <= 0) return;
 
-    if (t === "receita") setReceitas(r => r + n);
-    else setDespesas(d => d + n);
+    setItens(i => [...i, { nome, valor: n, tipo: t }]);
   }
+
+  const receitas = itens.filter(i => i.tipo === "receita").reduce((a, b) => a + b.valor, 0);
+  const despesas = itens.filter(i => i.tipo === "despesa").reduce((a, b) => a + b.valor, 0);
+  const total = receitas - despesas;
 
   return (
     <div>
@@ -44,19 +47,35 @@ export default function App() {
         <button onClick={add}>Adicionar</button>
       </section>
 
-      <table className="bordaboa">
+      <table>
         <thead>
           <tr>
-            <th>Receitas</th>
-            <th>Despesas</th>
-            <th>Total</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Tipo</th>
           </tr>
         </thead>
+
         <tbody>
+          {itens.map((i, index) => (
+            <tr key={index}>
+              <td>{i.nome}</td>
+              <td>R$ {i.valor.toFixed(2)}</td>
+              <td>{i.tipo}</td>
+            </tr>
+          ))}
+
           <tr>
-            <td>R$ {receitas.toFixed(2)}</td>
-            <td>R$ {despesas.toFixed(2)}</td>
-            <td>R$ {(receitas - despesas).toFixed(2)}</td>
+            <td><strong>Receitas</strong></td>
+            <td colSpan="2">R$ {receitas.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td><strong>Despesas</strong></td>
+            <td colSpan="2">R$ {despesas.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td colSpan="2">R$ {total.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>
